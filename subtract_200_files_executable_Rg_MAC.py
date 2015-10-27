@@ -3,6 +3,7 @@ import os
 
 
 # under development:
+
 # generalise for other formats
 
 number=raw_input("introduce the three digits (048):\n")
