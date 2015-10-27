@@ -23,8 +23,6 @@ concentration=float(raw_input("concentration, please:\n"))
 name_of_path_sample = "img_0%s_00001.dat"%(number)
 
 if os.path.isfile(name_of_path_sample):
-    #print "Found"
-    #print name_of_path_sample
     pass
 else:
     print "file %s not found"%name_of_path_sample
@@ -44,25 +42,40 @@ all_files_buffers = []
 #name_of_sample = name_of_path_sample.split("/")[-1]
 name_of_sample = name_of_path_sample
 
-#print name_of_sample
 
 name_of_sample_template = name_of_sample.split(".dat")[0].split("_000")[0]+"_"
-#print name_of_sample_template
+if len(name_of_sample.split(".dat")[0].split("_000")) == 3:
+    name_of_sample_template = '%s_000%s'%(name_of_sample.split(".dat")[0].split("_000")[0],name_of_sample.split(".dat")[0].split("_000")[1])
+    print name_of_sample_template
+
+
 
 reference_sample_number=name_of_sample_template.split("_")[1]
-#print reference_sample_number
+print reference_sample_number
 
 template_first_part = name_of_sample_template.split("-")[0]
+
 template_last_part = name_of_sample_template.split(reference_sample_number)[1]
+
+
+
 reference_buffer_number=int(reference_sample_number)-1
+print reference_buffer_number
 reference_buffer_number='0'+str(reference_buffer_number)
+
+if len(reference_buffer_number) == 2:
+    reference_buffer_number = '00%s'%reference_buffer_number
+
 if len(reference_buffer_number) == 3:
     reference_buffer_number = '0'+reference_buffer_number
+
+
+
 name_of_buffer_template = 'img_'
 
 
-#print reference_sample_number
-#print reference_buffer_number
+print reference_sample_number
+print reference_buffer_number
 
 number_of_sample = name_of_sample.split(".dat")[0].split("_")[-1]
 
@@ -76,8 +89,18 @@ while i<number_of_files:
         index_file = '00' + str(i)
     if len(index_file) == 4:
         index_file = '0'+index_file
-    #print index_file
+    
+    print index_file
+
+    
     name_sample = name_of_sample_template+index_file+".dat"
+    if len(name_sample.split('_')) == 2:
+        name_sample = name_of_sample_template+'_'+index_file+".dat"
+        print len(name_of_sample_template)
+        print index_file
+    
+    print name_sample
+    print 'here'
     
     if os.path.exists(name_sample):
         all_files_samples.append(name_sample) 
@@ -103,7 +126,12 @@ while i<number_of_files:
     #print index_file
         
     name_buffer = name_of_buffer_template + reference_buffer_number +'_'+ index_file+".dat"
-    #print name_buffer
+
+    print name_sample
+    print name_buffer
+
+
+    
     if os.path.exists(name_buffer):
         all_files_buffers.append(name_buffer)
         #print name_of_buffer_template + reference_buffer_number +'_'+ index_file+".dat"
