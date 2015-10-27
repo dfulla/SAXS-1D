@@ -10,6 +10,10 @@ import os
 
 ##############
 
+# under development:
+# scavenger still not working due a problem reading the files
+# generalise for other formats
+
 number=raw_input("introduce the three digits (048):\n")
 #number='048'
 concentration=float(raw_input("concentration, please:\n"))
